@@ -4,7 +4,9 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Menu/Item")]
 public class Item : ScriptableObject
 {
-    public string nameItem;
+    [Header("UI")]
     public Sprite icon;
-    public int amount;
+    
+    [Header("Stack")]
+    public bool stackAble;
 }
