@@ -2,9 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-
-public class InventorySlot : MonoBehaviour, IDropHandler
+using UnityEngine.UI;
+public class InventorySlot : MonoBehaviour, IDropHandler, IPointerClickHandler, IPointerExitHandler
 {
+    public Image image;
+    public Color selectColor, notSelectColor;
+
+    private void Start()
+    {
+        DeSelect();
+    }
+    public void Select()
+    {
+        image.color = selectColor;
+    }
+
+    public void DeSelect()
+    {
+        image.color = notSelectColor;
+    }
+
     public void OnDrop(PointerEventData eventData)
     {
         if (transform.childCount == 0)
@@ -23,5 +40,17 @@ public class InventorySlot : MonoBehaviour, IDropHandler
 
 
         }
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        InventorySlot inventorySlot = eventData.pointerClick.GetComponent<InventorySlot>();
+        inventoryManager.instance.UpdateSlotSlect(inventorySlot);
+
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+
     }
 }
